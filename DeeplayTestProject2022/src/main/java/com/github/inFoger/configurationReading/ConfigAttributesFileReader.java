@@ -15,7 +15,7 @@ public class ConfigAttributesFileReader implements IConfigAttributesReader {
     public List<IAttribute> readAttributes(String filePath) throws IOException {
         Properties propsFromConfig = new Properties();
         propsFromConfig.load(new FileInputStream(filePath));
-
+        //TODO здесь сделать try with resources
         List<IAttribute> attributeList = new ArrayList<>();
         int priorityOrder = priorityOrderStart;
         for(String attributeTitle : propsFromConfig.stringPropertyNames()) {
