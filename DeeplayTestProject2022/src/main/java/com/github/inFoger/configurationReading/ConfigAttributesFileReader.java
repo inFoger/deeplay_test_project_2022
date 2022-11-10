@@ -1,6 +1,7 @@
 package com.github.inFoger.configurationReading;
 
 import com.github.inFoger.Attribute;
+import com.github.inFoger.IAttribute;
 
 
 import java.io.FileInputStream;
@@ -11,11 +12,11 @@ import java.util.Properties;
 
 public class ConfigAttributesFileReader implements IConfigAttributesReader {
     private final int priorityOrderStart = 1;
-    public List<Attribute> readAttributes(String filePath) throws IOException {
+    public List<IAttribute> readAttributes(String filePath) throws IOException {
         Properties propsFromConfig = new Properties();
         propsFromConfig.load(new FileInputStream(filePath));
 
-        List<Attribute> attributeList = new ArrayList<>();
+        List<IAttribute> attributeList = new ArrayList<>();
         int priorityOrder = priorityOrderStart;
         for(String attributeTitle : propsFromConfig.stringPropertyNames()) {
             List<String> possibleValues = List.of(propsFromConfig.getProperty(attributeTitle).split(","));

@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         System.out.println("Hello world!");
         ConfigAttributesFileReader reader = new ConfigAttributesFileReader();
-        List<Attribute> attributeList = reader.readAttributes("configAttributes.ini");
+        List<IAttribute> attributeList = reader.readAttributes("configAttributes.ini");
         System.out.println();
     }
 }
