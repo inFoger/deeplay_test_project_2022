@@ -21,7 +21,7 @@ public class EntityFileReader implements IEntityReader {
         this.orderedAttributes = orderedAttributes;
     }
 
-    public List<IEntity> readEntities(String filePath, List<IAttribute> allAttributes) throws IOException {
+    public List<IEntity> readEntities(String filePath) throws IOException {
         List<IEntity> entities = new ArrayList<>();
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))){
             String readLine = bufferedReader.readLine();
@@ -43,7 +43,7 @@ public class EntityFileReader implements IEntityReader {
         return entities;
     }
 
-    public boolean isExistAttributeValue(String attributeValue, int attributeOrderNumber) {
+    private boolean isExistAttributeValue(String attributeValue, int attributeOrderNumber) {
         return orderedAttributes[attributeOrderNumber].getPossibleValues().contains(attributeValue);
     }
 
