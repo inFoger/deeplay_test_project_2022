@@ -43,5 +43,4 @@ public class EntityFileReader implements IEntityReader {
     private boolean isExistAttributeValue(String attributeValue, int attributeOrderNumber) {
         return orderedAttributes[attributeOrderNumber].getPossibleValues().contains(attributeValue);
     }
-
 }
