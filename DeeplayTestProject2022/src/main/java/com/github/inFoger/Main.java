@@ -1,7 +1,7 @@
 package com.github.inFoger;
 
-import com.github.inFoger.configurationReading.ConfigAttributesFileReader;
-import com.github.inFoger.entityReading.EntityFileReader;
+import com.github.inFoger.readers.configurationReading.ConfigAttributesFileReader;
+import com.github.inFoger.readers.entityReading.EntityFileReader;
 
 import java.io.IOException;
 import java.util.List;

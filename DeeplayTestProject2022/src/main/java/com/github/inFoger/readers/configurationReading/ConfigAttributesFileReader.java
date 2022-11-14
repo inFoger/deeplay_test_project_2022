@@ -1,4 +1,4 @@
-package com.github.inFoger.configurationReading;
+package com.github.inFoger.readers.configurationReading;
 
 import com.github.inFoger.Attribute;
 

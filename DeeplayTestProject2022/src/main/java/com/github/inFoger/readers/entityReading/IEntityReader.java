@@ -1,4 +1,4 @@
-package com.github.inFoger.entityReading;
+package com.github.inFoger.readers.entityReading;
 
 import com.github.inFoger.Entity;
 

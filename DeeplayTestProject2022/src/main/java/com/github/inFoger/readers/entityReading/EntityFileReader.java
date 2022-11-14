@@ -1,4 +1,4 @@
-package com.github.inFoger.entityReading;
+package com.github.inFoger.readers.entityReading;
 
 import com.github.inFoger.Attribute;
 import com.github.inFoger.Entity;
@@ -27,7 +27,7 @@ public class EntityFileReader implements IEntityReader {
                 String[] splittedLine = readLine.split(",");
                 for (int i = 0; i < splittedLine.length; i++) {
                     if(!isExistAttributeValue(splittedLine[i], i)) {
-                        throw new IOException(); //TODO сделать своё исключение
+                        throw new IOException();
                     }
                     currentAnimalAttributes.put(orderedAttributes[i].getTitle(), splittedLine[i]);
                 }
