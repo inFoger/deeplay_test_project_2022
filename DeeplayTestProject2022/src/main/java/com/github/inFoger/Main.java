@@ -10,10 +10,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         System.out.println("Hello world!");
         ConfigAttributesFileReader reader = new ConfigAttributesFileReader();
-        List<IAttribute> attributeList = reader.readAttributes("configAttributes.ini");
-        IAttribute[] attributes = attributeList.toArray(new IAttribute[0]);
+        List<Attribute> attributeList = reader.readAttributes("configAttributes.ini");
+        Attribute[] attributes = attributeList.toArray(new Attribute[0]);
         EntityFileReader entityFileReader = new EntityFileReader(attributes);
-        List<IEntity> entityList = entityFileReader.readEntities("animals");
+        List<Entity> entityList = entityFileReader.readEntities("animals");
         System.out.println(entityList.toArray());
     }
 }

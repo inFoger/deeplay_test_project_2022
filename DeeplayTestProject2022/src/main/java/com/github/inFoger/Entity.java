@@ -2,10 +2,10 @@ package com.github.inFoger;
 
 import java.util.Map;
 
-public class AnimalEntity implements IEntity {
-    private Map<String, String> attributes;
+public class Entity {
+    private final Map<String, String> attributes;
 
-    public AnimalEntity(Map<String, String> attributes) {
+    public Entity(Map<String, String> attributes) {
         this.attributes = attributes;
     }
 

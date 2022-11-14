@@ -1,12 +1,9 @@
 package com.github.inFoger.entityReading;
 
-import com.github.inFoger.AnimalEntity;
 import com.github.inFoger.Attribute;
-import com.github.inFoger.IAttribute;
-import com.github.inFoger.IEntity;
+import com.github.inFoger.Entity;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,14 +12,14 @@ import java.util.List;
 import java.util.Map;
 
 public class EntityFileReader implements IEntityReader {
-    private IAttribute[] orderedAttributes;
+    private final Attribute[] orderedAttributes;
 
-    public EntityFileReader(IAttribute[] orderedAttributes) {
+    public EntityFileReader(Attribute[] orderedAttributes) {
         this.orderedAttributes = orderedAttributes;
     }
 
-    public List<IEntity> readEntities(String filePath) throws IOException {
-        List<IEntity> entities = new ArrayList<>();
+    public List<Entity> readEntities(String filePath) {
+        List<Entity> entities = new ArrayList<>();
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))){
             String readLine = bufferedReader.readLine();
             while (readLine != null) {
@@ -34,7 +31,7 @@ public class EntityFileReader implements IEntityReader {
                     }
                     currentAnimalAttributes.put(orderedAttributes[i].getTitle(), splittedLine[i]);
                 }
-                entities.add(new AnimalEntity(currentAnimalAttributes));
+                entities.add(new Entity(currentAnimalAttributes));
                 readLine = bufferedReader.readLine();
             }
         } catch (Exception e) {
