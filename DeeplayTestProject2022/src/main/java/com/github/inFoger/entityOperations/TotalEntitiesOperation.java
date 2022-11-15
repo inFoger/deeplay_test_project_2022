@@ -5,6 +5,7 @@ import com.github.inFoger.Entity;
 import java.util.Map;
 
 public class TotalEntitiesOperation implements IEntityOperations {
+    private static final String commandName = "TOTAL";
     public static int getTotal(Entity[] allEntities, Map<String, String> filterAttributes) {
         //TODO проверять всё на Null ?
         if(filterAttributes == null || filterAttributes.isEmpty()) {
@@ -28,5 +29,9 @@ public class TotalEntitiesOperation implements IEntityOperations {
             }
         }
         return true;
+    }
+
+    public static String getCommandName() {
+        return commandName;
     }
 }

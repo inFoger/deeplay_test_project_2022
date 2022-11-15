@@ -2,6 +2,7 @@ package com.github.inFoger.readers.queryReading;
 
 import com.github.inFoger.Attribute;
 import com.github.inFoger.Query;
+import com.github.inFoger.entityOperations.TotalEntitiesOperation;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QueryFileReader implements IQueryReader{
-    private final String totalOperationCommand = "TOTAL";
     private final int commandPositionInQueryParts = 0;
     private final List<Attribute> attributeList;
 
@@ -45,7 +45,7 @@ public class QueryFileReader implements IQueryReader{
     }
 
     public boolean isExistCommand(String command) {
-        return command.toUpperCase().equals(totalOperationCommand);
+        return command.toUpperCase().equals(TotalEntitiesOperation.getCommandName());
     }
 
     private boolean isExistAttributeAndValue(String[] attributeValueCouple) {
