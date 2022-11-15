@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QueryFileReader implements IQueryReader{
+    private final String orCommand = "||";
+    private final String negationCommand = "!";
+    private final String equalsCommand = "=";
+
     private final int commandPositionInQueryParts = 0;
     private final List<Attribute> attributeList;
 
@@ -19,7 +23,7 @@ public class QueryFileReader implements IQueryReader{
     }
 
     @Override
-    public List<Query> readQuery(String filePath) throws IOException {
+    public List<Query> readQuery(String filePath) {
         List<Query> queryList = new ArrayList<>();
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
             String readLine = bufferedReader.readLine();
@@ -28,8 +32,10 @@ public class QueryFileReader implements IQueryReader{
                 if(isExistCommand(queryParts[commandPositionInQueryParts])) {
                     List<String> filterParts = new ArrayList<>();
                     for(int i = 1; i < queryParts.length; i++) {
-                        //TODO добавить проверку на специальные символы(отрицания и ИЛИ)
-                        String[] attributeValueCouple = queryParts[i].split("=");
+                        if(queryParts[i].equals(orCommand)) {
+                            continue;
+                        }
+                        String[] attributeValueCouple = queryParts[i].split(equalsCommand);
                         if(!isExistAttributeAndValue(attributeValueCouple)) {
                             throw new IOException();
                         }
@@ -37,6 +43,7 @@ public class QueryFileReader implements IQueryReader{
                     }
                     queryList.add(new Query(queryParts[commandPositionInQueryParts], filterParts.toArray(new String[0])));
                 }
+                readLine = bufferedReader.readLine();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,11 +51,15 @@ public class QueryFileReader implements IQueryReader{
         return queryList;
     }
 
-    public boolean isExistCommand(String command) {
+    private boolean isExistCommand(String command) {
         return command.toUpperCase().equals(TotalEntitiesOperation.getCommandName());
     }
 
     private boolean isExistAttributeAndValue(String[] attributeValueCouple) {
+        //убираем у значения знак отрицания в начале
+        if(attributeValueCouple[1].startsWith(negationCommand)) {
+            attributeValueCouple[1] = attributeValueCouple[1].substring(1);
+        }
         for(Attribute attribute : attributeList) {
             if(attribute.getTitle().equals(attributeValueCouple[0])
                     && attribute.getPossibleValues().contains(attributeValueCouple[1])) {

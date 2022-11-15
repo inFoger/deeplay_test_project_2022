@@ -1,23 +1,32 @@
 package com.github.inFoger;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class EntityFiltration {
+    private static final String orCommand = "||";
+    private static final String negationCommand = "!";
+    private static final String equalsCommand = "=";
+
     public static List<Entity> entityListFiltration(List<Entity> entityList, String[] filterParts) {
-        List<Entity> resultEntityList = new ArrayList<>(entityList);
+        Set<Entity> resultEntitySet = new HashSet<>();
+        List<Entity> partOfResultList = new ArrayList<>(entityList);
         for(int i = 0; i < filterParts.length; i++) {
-            //TODO можно вынести эти строки(символы) в константы
-            String[] attributeValueCouple = filterParts[i].split("=");
-            if(attributeValueCouple[i].startsWith("!")){
-                resultEntityList.addAll(getAllWithoutAttributeValue(resultEntityList, attributeValueCouple[0],
-                        attributeValueCouple[1].substring(1))); //берём подстроку без восклицательного знака
-            } else {
-                resultEntityList.addAll(getAllWithAttributeValue(resultEntityList, attributeValueCouple[0],
-                        attributeValueCouple[1]));
+            if(filterParts[i].equals(orCommand)) {
+                resultEntitySet.addAll(partOfResultList);
+                partOfResultList = new ArrayList<>(entityList);
+                continue;
             }
+            String[] attributeValueCouple = filterParts[i].split(equalsCommand);
+            if(attributeValueCouple[1].startsWith(negationCommand)){
+                partOfResultList = getAllWithoutAttributeValue(partOfResultList, attributeValueCouple[0],
+                        attributeValueCouple[1].substring(1)); //берём подстроку без восклицательного знака
+            } else {
+                partOfResultList = getAllWithAttributeValue(partOfResultList, attributeValueCouple[0],
+                        attributeValueCouple[1]);
+            }
+            resultEntitySet.addAll(partOfResultList);
         }
-        return resultEntityList;
+        return new ArrayList<>(resultEntitySet);
     }
 
     private static List<Entity> getAllWithAttributeValue(List<Entity> entityList, String attribute, String value) {
