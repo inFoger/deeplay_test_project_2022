@@ -19,7 +19,7 @@ public class EntityFiltration {
             String[] attributeValueCouple = filterParts[i].split(equalsCommand);
             if(attributeValueCouple[1].startsWith(negationCommand)){
                 partOfResultList = getAllWithoutAttributeValue(partOfResultList, attributeValueCouple[0],
-                        attributeValueCouple[1].substring(1)); //берём подстроку без восклицательного знака
+                        attributeValueCouple[1].substring(1)); //берём подстроку без знака отрицания
             } else {
                 partOfResultList = getAllWithAttributeValue(partOfResultList, attributeValueCouple[0],
                         attributeValueCouple[1]);
