@@ -32,12 +32,11 @@ public class QueryFileReader implements IQueryReader{
                 if(isExistCommand(queryParts[commandPositionInQueryParts])) {
                     List<String> filterParts = new ArrayList<>();
                     for(int i = 1; i < queryParts.length; i++) {
-                        if(queryParts[i].equals(orCommand)) {
-                            continue;
-                        }
-                        String[] attributeValueCouple = queryParts[i].split(equalsCommand);
-                        if(!isExistAttributeAndValue(attributeValueCouple)) {
-                            throw new IOException();
+                        if(!queryParts[i].equals(orCommand)) {
+                            String[] attributeValueCouple = queryParts[i].split(equalsCommand);
+                            if(!isExistAttributeAndValue(attributeValueCouple)) {
+                                throw new IOException();
+                            }
                         }
                         filterParts.add(queryParts[i]);
                     }

@@ -24,8 +24,8 @@ public class EntityFiltration {
                 partOfResultList = getAllWithAttributeValue(partOfResultList, attributeValueCouple[0],
                         attributeValueCouple[1]);
             }
-            resultEntitySet.addAll(partOfResultList);
         }
+        resultEntitySet.addAll(partOfResultList);
         return new ArrayList<>(resultEntitySet);
     }
 

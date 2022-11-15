@@ -4,7 +4,6 @@ import com.github.inFoger.Entity;
 import com.github.inFoger.EntityFiltration;
 
 import java.util.List;
-import java.util.Map;
 
 public class TotalEntitiesOperation implements IEntityOperations {
     private static final String commandName = "TOTAL";

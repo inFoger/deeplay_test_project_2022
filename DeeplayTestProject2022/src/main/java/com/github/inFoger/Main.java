@@ -20,6 +20,5 @@ public class Main {
         QueryExecutor.execute(queryList, entityList);
 
         //Сделать вывод (логгер) и написать тесты
-        //
     }
 }
