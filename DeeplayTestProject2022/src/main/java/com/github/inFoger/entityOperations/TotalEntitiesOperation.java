@@ -1,34 +1,19 @@
 package com.github.inFoger.entityOperations;
 
 import com.github.inFoger.Entity;
+import com.github.inFoger.EntityFiltration;
 
+import java.util.List;
 import java.util.Map;
 
 public class TotalEntitiesOperation implements IEntityOperations {
     private static final String commandName = "TOTAL";
-    public static int getTotal(Entity[] allEntities, Map<String, String> filterAttributes) {
+    public static int getTotal(List<Entity> allEntities, String[] filterParts) {
         //TODO проверять всё на Null ?
-        if(filterAttributes == null || filterAttributes.isEmpty()) {
-            return allEntities.length;
+        if(filterParts == null || filterParts.length < 1) {
+            return allEntities.size();
         }
-        int totalAmount = 0;
-        //Можно использовать Stream и лямбды, но читаемость просядет
-        for (Entity currentEntity : allEntities) {
-            if(isFitsConditions(currentEntity, filterAttributes)) {
-                totalAmount++;
-            }
-        }
-        return totalAmount;
-    }
-
-    private static boolean isFitsConditions(Entity entity, Map<String, String> filterAttributes) {
-        Map<String, String> entityAttributes = entity.getAttributes();
-        for(String currentAttribute : entityAttributes.keySet()) {
-            if(!entityAttributes.get(currentAttribute).equals(filterAttributes.get(currentAttribute))) {
-                return false;
-            }
-        }
-        return true;
+        return EntityFiltration.entityListFiltration(allEntities, filterParts).size();
     }
 
     public static String getCommandName() {
