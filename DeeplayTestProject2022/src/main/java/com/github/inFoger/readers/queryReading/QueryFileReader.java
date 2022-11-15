@@ -26,13 +26,16 @@ public class QueryFileReader implements IQueryReader{
             while (readLine != null) {
                 String[] queryParts = readLine.split(" ");
                 if(isExistCommand(queryParts[commandPositionInQueryParts])) {
-                    List<String> attributeFilters = new ArrayList<>();
+                    List<String> filterParts = new ArrayList<>();
                     for(int i = 1; i < queryParts.length; i++) {
+                        //TODO добавить проверку на специальные символы(отрицания и ИЛИ)
                         String[] attributeValueCouple = queryParts[i].split("=");
-                        if(isExistAttributeAndValue(attributeValueCouple)) {
-                            // добавить в Query мапу вместо списка и сюда
+                        if(!isExistAttributeAndValue(attributeValueCouple)) {
+                            throw new IOException();
                         }
+                        filterParts.add(queryParts[i]);
                     }
+                    queryList.add(new Query(queryParts[commandPositionInQueryParts], filterParts.toArray(new String[0])));
                 }
             }
         } catch (Exception e) {
@@ -40,7 +43,6 @@ public class QueryFileReader implements IQueryReader{
         }
         return queryList;
     }
-    //испоьльзовать хэщ-мапу
 
     public boolean isExistCommand(String command) {
         return command.toUpperCase().equals(totalOperationCommand);

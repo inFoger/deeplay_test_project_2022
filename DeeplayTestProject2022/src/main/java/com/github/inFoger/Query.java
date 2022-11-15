@@ -2,18 +2,18 @@ package com.github.inFoger;
 
 public class Query {
     private final String command;
-    private final String[] filters;
+    private final String[] filterParts;
 
-    public Query(String command, String[] filters) {
+    public Query(String command, String[] filterParts) {
         this.command = command;
-        this.filters = filters;
+        this.filterParts = filterParts;
     }
 
     public String getCommand() {
         return command;
     }
 
-    public String[] getFilters() {
-        return filters;
+    public String[] getFilterParts() {
+        return filterParts;
     }
 }
