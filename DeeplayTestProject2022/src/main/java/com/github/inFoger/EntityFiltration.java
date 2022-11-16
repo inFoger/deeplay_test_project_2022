@@ -3,6 +3,13 @@ package com.github.inFoger;
 import java.util.*;
 import java.util.logging.Logger;
 
+/**
+ * Класс EntityFiltration отвеает за "фильтрацию" объектов класса Entity(животных)
+ * в соответствии с запросом filterParts[](тут он представлен в виде частей для удобства обработки)
+ * Метод getAllWithAttributeValue() возвращает все объекты подходящие правилу
+ * Метод getAllWithoutAttributeValue() возвращает все объекты НЕ подходящие правилу
+ */
+
 public class EntityFiltration {
     private static final Logger logger = Logger.getLogger(EntityFiltration.class.getName());
     private static final String orCommand = "||";

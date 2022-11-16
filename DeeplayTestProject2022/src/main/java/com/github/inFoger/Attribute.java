@@ -3,6 +3,10 @@ package com.github.inFoger;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Класс Attribute хранит в себе атрибут(свойство животного) и его возможные значения
+ */
+
 public class Attribute {
     private final String title;
     private final List<String> possibleValues;

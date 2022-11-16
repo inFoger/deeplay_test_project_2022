@@ -18,7 +18,6 @@ class EntityFileReaderTest {
         List<Attribute> attributeList = new ArrayList<>(Arrays.asList(attribute1, attribute2, attribute3));
 
         List<Entity> entityList1 = new ArrayList<>();
-        //заполнение
         Map<String, String> mapForEntityList = new HashMap<>();
         mapForEntityList.put("WEIGHT", "LIGHT");
         mapForEntityList.put("HEIGHT", "SMALL");
@@ -39,8 +38,18 @@ class EntityFileReaderTest {
         entityList1.add(entity3);
 
         EntityFileReader fileReader = new EntityFileReader(attributeList.toArray(new Attribute[0]));
-        List<Entity> resultList = fileReader.readEntities("animals");
-        assertEquals(entityList1, resultList);
+
+        assertThrows(NullPointerException.class, () -> fileReader.readEntities(null));
+        assertThrows(Exception.class, () -> fileReader.readEntities("notExistingFile"));
+
+        try {
+            List<Entity> resultList = fileReader.readEntities("animals");
+            assertEquals(entityList1, resultList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
+
 
     }
 }

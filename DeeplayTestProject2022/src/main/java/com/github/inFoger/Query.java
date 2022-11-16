@@ -3,6 +3,11 @@ package com.github.inFoger;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * Класс Query хранит в себе запросы(то, что нужно сделать с животными)
+ * Пример запроса: TOTAL TYPE=HERBIVORE HEIGHT=SMALL || TYPE=CARNIVORE HEIGHT=SMALL
+ */
+
 public class Query {
     private final String command;
     private final String[] filterParts;

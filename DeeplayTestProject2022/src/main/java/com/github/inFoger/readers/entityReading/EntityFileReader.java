@@ -10,8 +10,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
+
+/**
+ * Класс EntityFileReader считывает животных из файла и возвращает их в виде списка Entity
+ * isExistAttributeValue() проверят существует ли данное значение атрибута(свойства животного)
+ */
 
 public class EntityFileReader implements IEntityReader {
+    private final Logger logger = Logger.getLogger(EntityFileReader.class.getName());
     private final Attribute[] attributes;
 
     public EntityFileReader(Attribute[] attributes) {
@@ -19,7 +26,11 @@ public class EntityFileReader implements IEntityReader {
     }
 
     //в порядке
-    public List<Entity> readEntities(String filePath) {
+    public List<Entity> readEntities(String filePath) throws Exception {
+        if(filePath == null) {
+            logger.warning("String argument is null");
+            throw new NullPointerException("String argument is null");
+        }
         List<Entity> entities = new ArrayList<>();
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))){
             String readLine = bufferedReader.readLine();
@@ -36,7 +47,8 @@ public class EntityFileReader implements IEntityReader {
                 readLine = bufferedReader.readLine();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warning(e.getMessage());
+            throw new Exception(e);
         }
         return entities;
     }

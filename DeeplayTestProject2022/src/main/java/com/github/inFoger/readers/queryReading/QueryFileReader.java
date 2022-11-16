@@ -9,8 +9,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+
+/**
+ * Класс QueryFileReader считывает запрос из файла
+ * isExistCommand() - позволяет проверить существование команды
+ * isExistAttributeAndValue() - проверяет существование пары атрибут(свойство животного) - значение
+ */
 
 public class QueryFileReader implements IQueryReader{
+    private final Logger logger = Logger.getLogger(QueryFileReader.class.getName());
     private final String orCommand = "||";
     private final String negationCommand = "!";
     private final String equalsCommand = "=";
@@ -23,7 +31,11 @@ public class QueryFileReader implements IQueryReader{
     }
 
     @Override
-    public List<Query> readQuery(String filePath) {
+    public List<Query> readQuery(String filePath) throws Exception {
+        if(filePath == null) {
+            logger.warning("String argument is null");
+            throw new NullPointerException("String argument is null");
+        }
         List<Query> queryList = new ArrayList<>();
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
             String readLine = bufferedReader.readLine();
@@ -45,7 +57,8 @@ public class QueryFileReader implements IQueryReader{
                 readLine = bufferedReader.readLine();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warning(e.getMessage());
+            throw new Exception(e);
         }
         return queryList;
     }

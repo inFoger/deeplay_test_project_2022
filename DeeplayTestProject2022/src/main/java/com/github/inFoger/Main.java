@@ -4,11 +4,10 @@ import com.github.inFoger.readers.configurationReading.ConfigAttributesFileReade
 import com.github.inFoger.readers.entityReading.EntityFileReader;
 import com.github.inFoger.readers.queryReading.QueryFileReader;
 
-import java.io.IOException;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         try {
             ConfigAttributesFileReader reader = new ConfigAttributesFileReader();
             List<Attribute> attributeList = reader.readAttributes("configAttributes.ini");
@@ -21,7 +20,6 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
     }
 }

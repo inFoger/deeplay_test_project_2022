@@ -23,10 +23,17 @@ class QueryFileReaderTest {
         queryList.add(new Query("TOTAL", new String[]{"TYPE=HERBIVORE", "HEIGHT=SMALL", "||",
                 "TYPE=CARNIVORE", "HEIGHT=SMALL"}));
         queryList.add(new Query("TOTAL", new String[]{"TYPE=OMNIVORE", "HEIGHT=!SMALL"}));
-
         QueryFileReader fileReader = new QueryFileReader(attributeList);
-        List<Query> resultList = fileReader.readQuery("queryFile");
-        assertEquals(queryList, resultList);
 
+        assertThrows(NullPointerException.class, () -> fileReader.readQuery(null));
+        assertThrows(Exception.class, () -> fileReader.readQuery("NotExistingFile"));
+
+        try {
+            List<Query> resultList = fileReader.readQuery("queryFile");
+            assertEquals(queryList, resultList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
     }
 }
