@@ -5,23 +5,15 @@ import java.util.Objects;
 
 public class Attribute {
     private final String title;
-    private final int priorityOrder;
     private final List<String> possibleValues;
 
-    //TODO Нужен ли пиоритет?
-    //fixme
-    public Attribute(String title, int priorityOrder, List<String> possibleValues) {
+    public Attribute(String title, List<String> possibleValues) {
         this.title = title;
-        this.priorityOrder = priorityOrder;
         this.possibleValues = possibleValues;
     }
 
     public String getTitle() {
         return title;
-    }
-
-    public int getPriorityOrder() {
-        return priorityOrder;
     }
 
     public List<String> getPossibleValues() {
@@ -33,11 +25,11 @@ public class Attribute {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Attribute attribute = (Attribute) o;
-        return priorityOrder == attribute.priorityOrder && title.equals(attribute.title) && Objects.equals(possibleValues, attribute.possibleValues);
+        return title.equals(attribute.title) && Objects.equals(possibleValues, attribute.possibleValues);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, priorityOrder, possibleValues);
+        return Objects.hash(title, possibleValues);
     }
 }
