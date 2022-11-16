@@ -1,13 +1,22 @@
 package com.github.inFoger;
 
 import java.util.*;
+import java.util.logging.Logger;
 
 public class EntityFiltration {
+    private static final Logger logger = Logger.getLogger(EntityFiltration.class.getName());
     private static final String orCommand = "||";
     private static final String negationCommand = "!";
     private static final String equalsCommand = "=";
 
-    public static List<Entity> entityListFiltration(List<Entity> entityList, String[] filterParts) {
+    public static List<Entity> entityListFiltration(List<Entity> entityList, String[] filterParts) throws NullPointerException {
+        if(entityList == null || filterParts == null) {
+            logger.warning("Argument is null");
+            throw new NullPointerException("Argument is null");
+        }
+        if(entityList.isEmpty() || filterParts.length < 1) {
+            logger.info("Argument is empty");
+        }
         Set<Entity> resultEntitySet = new HashSet<>();
         List<Entity> partOfResultList = new ArrayList<>(entityList);
         for(int i = 0; i < filterParts.length; i++) {
