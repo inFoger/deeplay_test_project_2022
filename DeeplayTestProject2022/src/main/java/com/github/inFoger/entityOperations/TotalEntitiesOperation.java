@@ -4,13 +4,15 @@ import com.github.inFoger.Entity;
 import com.github.inFoger.EntityFiltration;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class TotalEntitiesOperation implements IEntityOperations {
+    private static final Logger logger = Logger.getLogger(TotalEntitiesOperation.class.getName());
     private static final String commandName = "TOTAL";
     public static int getTotal(List<Entity> allEntities, String[] filterParts) {
-        //TODO проверять всё на Null ?
-        if(filterParts == null || filterParts.length < 1) {
-            return allEntities.size();
+        if(allEntities == null || filterParts == null) {
+            logger.warning("Argument is null");
+            throw new NullPointerException("Argument is null");
         }
         return EntityFiltration.entityListFiltration(allEntities, filterParts).size();
     }
