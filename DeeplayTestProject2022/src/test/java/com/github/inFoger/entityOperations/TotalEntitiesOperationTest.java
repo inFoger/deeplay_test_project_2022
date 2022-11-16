@@ -22,23 +22,23 @@ class TotalEntitiesOperationTest {
                 "TYPE=CARNIVORE", "HEIGHT=SMALL"};
         String[] filterParts3 = new String[]{"TYPE=OMNIVORE", "HEIGHT=!SMALL"};
         //заполнение
-        Map<String, String> mapForEntityList3 = new HashMap<>();
-        mapForEntityList3.put("WEIGHT", "LIGHT");
-        mapForEntityList3.put("HEIGHT", "SMALL");
-        mapForEntityList3.put("TYPE", "OMNIVORE");
-        Entity entity1 = new Entity(mapForEntityList3);
+        Map<String, String> mapForEntityList = new HashMap<>();
+        mapForEntityList.put("WEIGHT", "LIGHT");
+        mapForEntityList.put("HEIGHT", "SMALL");
+        mapForEntityList.put("TYPE", "OMNIVORE");
+        Entity entity1 = new Entity(mapForEntityList);
         entityList1.add(entity1);
-        mapForEntityList3 = new HashMap<>();
-        mapForEntityList3.put("WEIGHT", "HEAVY");
-        mapForEntityList3.put("HEIGHT", "SMALL");
-        mapForEntityList3.put("TYPE", "HERBIVORE");
-        Entity entity2 = new Entity(mapForEntityList3);
+        mapForEntityList = new HashMap<>();
+        mapForEntityList.put("WEIGHT", "HEAVY");
+        mapForEntityList.put("HEIGHT", "SMALL");
+        mapForEntityList.put("TYPE", "HERBIVORE");
+        Entity entity2 = new Entity(mapForEntityList);
         entityList1.add(entity2);
-        mapForEntityList3 = new HashMap<>();
-        mapForEntityList3.put("WEIGHT", "HEAVY");
-        mapForEntityList3.put("HEIGHT", "SHORT");
-        mapForEntityList3.put("TYPE", "HERBIVORE");
-        Entity entity3 = new Entity(mapForEntityList3);
+        mapForEntityList = new HashMap<>();
+        mapForEntityList.put("WEIGHT", "HEAVY");
+        mapForEntityList.put("HEIGHT", "SHORT");
+        mapForEntityList.put("TYPE", "HERBIVORE");
+        Entity entity3 = new Entity(mapForEntityList);
         entityList1.add(entity3);
         
         assertThrows(NullPointerException.class,

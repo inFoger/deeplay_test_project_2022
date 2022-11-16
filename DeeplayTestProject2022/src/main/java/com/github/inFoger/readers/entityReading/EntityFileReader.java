@@ -12,12 +12,13 @@ import java.util.List;
 import java.util.Map;
 
 public class EntityFileReader implements IEntityReader {
-    private final Attribute[] orderedAttributes;
+    private final Attribute[] attributes;
 
-    public EntityFileReader(Attribute[] orderedAttributes) {
-        this.orderedAttributes = orderedAttributes;
+    public EntityFileReader(Attribute[] attributes) {
+        this.attributes = attributes;
     }
 
+    //в порядке
     public List<Entity> readEntities(String filePath) {
         List<Entity> entities = new ArrayList<>();
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))){
@@ -29,7 +30,7 @@ public class EntityFileReader implements IEntityReader {
                     if(!isExistAttributeValue(splittedLine[i], i)) {
                         throw new IOException();
                     }
-                    currentAnimalAttributes.put(orderedAttributes[i].getTitle(), splittedLine[i]);
+                    currentAnimalAttributes.put(attributes[i].getTitle(), splittedLine[i]);
                 }
                 entities.add(new Entity(currentAnimalAttributes));
                 readLine = bufferedReader.readLine();
@@ -41,6 +42,6 @@ public class EntityFileReader implements IEntityReader {
     }
 
     private boolean isExistAttributeValue(String attributeValue, int attributeOrderNumber) {
-        return orderedAttributes[attributeOrderNumber].getPossibleValues().contains(attributeValue);
+        return attributes[attributeOrderNumber].getPossibleValues().contains(attributeValue);
     }
 }
