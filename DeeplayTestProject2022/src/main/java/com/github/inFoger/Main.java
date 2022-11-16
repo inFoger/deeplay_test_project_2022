@@ -17,8 +17,12 @@ public class Main {
         List<Entity> entityList = entityFileReader.readEntities("animals");
         QueryFileReader queryFileReader = new QueryFileReader(attributeList);
         List<Query> queryList = queryFileReader.readQuery("queryFile");
-        QueryExecutor.execute(queryList, entityList);
+        try {
+            QueryExecutor.execute(queryList, entityList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        //Сделать вывод (логгер) и написать тесты
+
     }
 }
