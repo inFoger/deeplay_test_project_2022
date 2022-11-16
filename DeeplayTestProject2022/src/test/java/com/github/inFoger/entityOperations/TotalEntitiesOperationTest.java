@@ -61,6 +61,7 @@ class TotalEntitiesOperationTest {
              assertEquals(1, TotalEntitiesOperation.getTotal(entityList1, filterParts2));
              assertEquals(0, TotalEntitiesOperation.getTotal(entityList1, filterParts3));
         } catch (Exception e) {
+            e.printStackTrace();
             fail();
         }
     }

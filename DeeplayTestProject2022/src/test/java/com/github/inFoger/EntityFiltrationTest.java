@@ -64,6 +64,7 @@ class EntityFiltrationTest {
             result = EntityFiltration.entityListFiltration(entityList1, filterParts3);
             assertEquals(List.of(), result);
         } catch (Exception e) {
+            e.printStackTrace();
             fail();
         }
 
